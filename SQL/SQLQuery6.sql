@@ -197,6 +197,7 @@ GO
 
 --DROP INDEX IDX_Transactions_Sender ON Transactions;
 --DROP INDEX IDX_Transactions_Receiver ON Transactions;
+--DROP INDEX IDX_SenderReceiverBankAccountId ON Transactions;
 
 --SELECT SenderBankAccountId, ReceiverBankAccountId, Amount FROM Transactions WHERE ReceiverBankAccountId = 7;
 
