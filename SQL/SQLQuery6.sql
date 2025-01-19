@@ -38,8 +38,8 @@ GO
 --);
 --GO
 
-
 --PRINT 'Database and tables have been created successfully!';
+
 
 ---- Insert sample data into Customers table
 --INSERT INTO Customers (Name, Email, Mobile, Address, Birthday)
@@ -144,7 +144,6 @@ GO
 --PRINT 'Sample data has been inserted into the tables!';
 
 
-
 -- Inserting one million randomized transactions into the transaction table
 
 ---- Temporary table to store random transactions (optional for better performance)
@@ -186,34 +185,15 @@ GO
 
 --PRINT '1,000,000 transactions inserted successfully!';
 
-
---SELECT * FROM Transactions WHERE SenderBankAccountId = 15;
+---- First test without index
+--SELECT SenderBankAccountId, ReceiverBankAccountId FROM Transactions WHERE SenderBankAccountId = 15 AND ReceiverBankAccountId = 10 ;
 
 ---- Create Indexes for Foreign Keys in Transactions Table
---CREATE INDEX IDX_Transactions_Sender ON Transactions(SenderBankAccountId);
---CREATE INDEX IDX_Transactions_Receiver ON Transactions(ReceiverBankAccountId);
 --CREATE INDEX IDX_SenderReceiverBankAccountId ON Transactions (SenderBankAccountId, ReceiverBankAccountId);
---GO
 
---DROP INDEX IDX_Transactions_Sender ON Transactions;
---DROP INDEX IDX_Transactions_Receiver ON Transactions;
---DROP INDEX IDX_SenderReceiverBankAccountId ON Transactions;
-
---SELECT SenderBankAccountId, ReceiverBankAccountId, Amount FROM Transactions WHERE ReceiverBankAccountId = 7;
-
---SELECT SenderBankAccountId, ReceiverBankAccountId, Amount FROM Transactions WHERE SenderBankAccountId = 15;
-
---SELECT SenderBankAccountId, ReceiverBankAccountId, Amount FROM Transactions WHERE SenderBankAccountId = 15 AND ReceiverBankAccountId = 10;
-
+---- Second test with index
+--SELECT SenderBankAccountId, ReceiverBankAccountId FROM Transactions WHERE SenderBankAccountId = 15 AND ReceiverBankAccountId = 10 ;
 
 -- Helper Queries
-
+--DROP INDEX IDX_SenderReceiverBankAccountId ON Transactions;
 --EXEC sp_helpindex 'Transactions';
-
---DROP INDEX IDX_Transactions_Sender ON Transactions;
---DROP INDEX IDX_Transactions_Receiver ON Transactions;
-
---SELECT SenderBankAccountId, ReceiverBankAccountId 
---FROM Transactions 
---WHERE ReceiverBankAccountId = 15 
---  OPTION (FORCESEEK);
